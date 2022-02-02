@@ -1,6 +1,10 @@
 
 
+
 /*created by prashant shukla */
+rightWristX = "";
+rightWristY  = "";
+score_rightWrist = "";
 
 var paddle2 =10,paddle1=10;
 
@@ -39,9 +43,10 @@ function modelLoaded(){
 function gotPoses(results)
 {
   if(results.length > 0){
-    noseX = results[0].pose.nose.x;
-    noseY = results[0].pose.nose.y;
-    console.log("noseX = " + noseX + ", noseY = " + noseY);
+    rightWristX = results[0].pose.rightWrist.x;
+    rightWristY = results[0].pose.rightWrist.y-10;
+    console.log("rightWristX = " + rightWristX + ", rightWristY = " + rightWristY);
+    score_rightWrist = results[0].pose.keypoints[10].score;
   }
 }
 
@@ -63,12 +68,17 @@ function draw(){
    paddleInCanvas();
  
    //left paddle
-   fill(250,0,0);
+   if(score_rightWrist > 0.2)
+   {
+     fill("teal");
+     stroke("red");
+     circle(rightWristX, rightWristY, 20);
+   }
+    fill(250,0,0);
     stroke(0,0,250);
     strokeWeight(0.5);
    paddle1Y = mouseY; 
    rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
-   
    
     //pc computer paddle
     fill("#FFA500");
