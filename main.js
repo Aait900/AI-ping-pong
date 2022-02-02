@@ -191,5 +191,5 @@ function paddleInCanvas(){
   }
   if(mouseY < 0){
     mouseY =0;
-  }  
+  }   
 }
