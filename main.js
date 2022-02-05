@@ -1,10 +1,12 @@
 
 
 
+
 /*created by prashant shukla */
 rightWristX = "";
 rightWristY  = "";
 score_rightWrist = "";
+game_status = "";
 
 var paddle2 =10,paddle1=10;
 
@@ -49,10 +51,16 @@ function gotPoses(results)
     score_rightWrist = results[0].pose.keypoints[10].score;
   }
 }
+function startGame()
+{
+  game_status = "start"; 
+  document.getElementById("status").innerHTML = "Game is Loaded";
+}
 
 
 function draw(){
-
+  if(game_status == "start")
+{
  background(0); 
  image(video, 0, 0, 700, 600);
 
@@ -77,7 +85,7 @@ function draw(){
     fill(250,0,0);
     stroke(0,0,250);
     strokeWeight(0.5);
-   paddle1Y = mouseY; 
+   paddle1Y = rightWristY; 
    rect(paddle1X,paddle1Y,paddle1,paddle1Height,100);
    
     //pc computer paddle
@@ -96,13 +104,13 @@ function draw(){
    
    //function move call which in very important
     move();
-}
+}}
 
 
 
 //function reset when ball does notcame in the contact of padde
 function reset(){
-   ball.x = width/2+100,
+   ball.x = width/2+100;
    ball.y = height/2+100;
    ball.dx=3;
    ball.dy =3;
@@ -191,5 +199,5 @@ function paddleInCanvas(){
   }
   if(mouseY < 0){
     mouseY =0;
-  }   
+  }  
 }
